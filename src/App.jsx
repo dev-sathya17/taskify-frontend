@@ -1,0 +1,65 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+import Register from "./pages/Register/Register";
+import LoginPage from "./pages/login/LoginPage";
+import ForgotPassword from "./pages/forgot Password/ForgotPassword";
+import ResetPassword from "./pages/forgot password/ResetPassword";
+import UserDashboard from "./pages/UserDashboard/UserDashboard";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import userLoader from "./loaders/user.loader";
+import AuthenticatedRoute from "./routes/AuthenticatedRoute";
+import ProtectedRoute from "./routes/ProtectedRoute";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    loader: userLoader.checkAuth,
+    element: <AuthenticatedRoute />,
+    children: [
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "",
+        element: <LoginPage />,
+      },
+      {
+        path: "forgot",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "reset",
+        element: <ResetPassword />,
+      },
+      {
+        path: "user",
+        element: <ProtectedRoute />,
+        loader: userLoader.checkAuth,
+        children: [
+          {
+            path: "dashboard",
+            element: <UserDashboard />,
+          },
+        ],
+      },
+      {
+        path: "admin",
+        element: <ProtectedRoute />,
+        loader: userLoader.checkAuth,
+        children: [
+          {
+            path: "dashboard",
+            element: <AdminDashboard />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
+}
+
+export default App;
