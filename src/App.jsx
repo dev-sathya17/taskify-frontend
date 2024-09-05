@@ -40,6 +40,7 @@ const router = createBrowserRouter([
           {
             path: "dashboard",
             element: <UserDashboard />,
+            loader: userLoader.checkAuth,
           },
         ],
       },
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
           {
             path: "dashboard",
             element: <AdminDashboard />,
+            loader: userLoader.checkAuth,
           },
         ],
       },
