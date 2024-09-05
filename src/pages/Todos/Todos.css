@@ -1,0 +1,106 @@
+.todo-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filters input {
+  padding: 8px;
+  font-size: 16px;
+  width: 70%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.filters select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.todo-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.todo-card {
+  width: 300px;
+  background-color: var(--white);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.todo-completed {
+  border: 2px solid var(--green);
+}
+
+.todo-card:hover {
+  transform: scale(1.02);
+}
+
+.todo-low {
+  color: var(--accent);
+}
+
+.todo-medium {
+  color: #ffae00;
+}
+
+.todo-high {
+  color: var(--red);
+}
+
+.todo-backlog {
+  border: 2px solid var(--red);
+}
+
+.todo-header h3 {
+  color: var(--accent-dark);
+}
+
+.todo-body p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.todo-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-user-image {
+  height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
+
+  .todo-cards-container {
+    flex-direction: column;
+  }
+
+  .todo-card {
+    width: 100%;
+  }
+}

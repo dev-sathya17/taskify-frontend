@@ -9,6 +9,15 @@ const adminLoader = {
       return error.response.data.message;
     }
   },
+  fetchAllTodos: async () => {
+    try {
+      const response = await adminService.getAllTodos();
+      console.log(response);
+      return { data: response };
+    } catch (error) {
+      return error.response.data.message;
+    }
+  },
 };
 
 export default adminLoader;

@@ -131,9 +131,12 @@
     height: 60%;
   }
   .nav-footer-mob {
-    align-self: center;
     padding: 20px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
   }
   .nav-logout-btn {
     width: 100%;

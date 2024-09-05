@@ -11,6 +11,7 @@ import AuthenticatedRoute from "./routes/AuthenticatedRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Profile from "./pages/Profile/Profile";
 import Users from "./pages/Users/Users";
+import Todos from "./pages/Todos/Todos";
 import adminLoader from "./loaders/admin.loader";
 
 const router = createBrowserRouter([
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <ProtectedRoute />,
+        loader: userLoader.checkAuth,
         children: [
           {
             path: "",
@@ -77,6 +79,8 @@ const router = createBrowserRouter([
           },
           {
             path: "tasks",
+            element: <Todos />,
+            loader: adminLoader.fetchAllTodos,
           },
         ],
       },

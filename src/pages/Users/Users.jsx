@@ -3,7 +3,7 @@ import "./Users.css";
 import { useLoaderData } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import userServices from "../../services/user.service";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteUserFailure,
   deleteUserStart,

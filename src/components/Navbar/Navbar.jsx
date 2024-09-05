@@ -14,7 +14,7 @@ import {
 const Navbar = ({ role, active }) => {
   const [view, setView] = useState(false);
   const navigate = useNavigate();
-  const { loading } = useSelector((state) => state.user);
+  const { currentUser, loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleToggle = () => setView(!view);
@@ -39,6 +39,10 @@ const Navbar = ({ role, active }) => {
           dispatch(signOutUserFailure(error.message));
         });
     }
+  };
+
+  const handleProfileNavigation = () => {
+    navigate(`/profile`);
   };
 
   return (
@@ -71,9 +75,13 @@ const Navbar = ({ role, active }) => {
         </ul>
         <div className="nav-footer">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/640px-User_icon_2.svg.png"
+            src={`http://localhost:3000/${currentUser.image.replace(
+              "\\",
+              "/"
+            )}`}
             alt="profile picture"
             className="nav-profile"
+            onClick={handleProfileNavigation}
           />
           <button
             className="nav-logout-btn"
@@ -112,6 +120,15 @@ const Navbar = ({ role, active }) => {
             </li>
           </ul>
           <div className="nav-footer-mob">
+            <img
+              src={`http://localhost:3000/${currentUser.image.replace(
+                "\\",
+                "/"
+              )}`}
+              alt="profile picture"
+              className="nav-profile"
+              onClick={handleProfileNavigation}
+            />
             <button
               className="nav-logout-btn"
               onClick={handleClick}
