@@ -55,10 +55,25 @@ const userServices = {
       return error.response.data.message;
     }
   },
-
   logout: async () => {
     try {
       const response = await protectedInstance.get("/users/logout");
+      return { data: response.data, status: response.status };
+    } catch (error) {
+      return error.response.data.message;
+    }
+  },
+  updateUser: async (id, data) => {
+    try {
+      const response = await protectedInstance.put(`/users/update/${id}`, data);
+      return { data: response.data, status: response.status };
+    } catch (error) {
+      return error.response.data.message;
+    }
+  },
+  deleteUser: async (id) => {
+    try {
+      const response = await protectedInstance.delete(`/users/delete/${id}`);
       return { data: response.data, status: response.status };
     } catch (error) {
       return error.response.data.message;

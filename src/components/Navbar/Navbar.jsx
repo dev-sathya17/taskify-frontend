@@ -11,7 +11,7 @@ import {
   signOutUserStart,
   signOutUserSuccess,
 } from "../../features/user/userSlice";
-const Navbar = ({ role }) => {
+const Navbar = ({ role, active }) => {
   const [view, setView] = useState(false);
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.user);
@@ -49,37 +49,22 @@ const Navbar = ({ role }) => {
           <RxHamburgerMenu className="hamburger-icon" onClick={handleToggle} />
         )}
         <ul className="nav-items">
-          <li className="nav-item">
-            <NavLink
-              to={`/${role}/dashboard`}
-              // exact
-              className="nav-link"
-              // activeClassName="active-link"
-            >
+          <li className={`nav-item ${active === "home" ? "active" : ""}`}>
+            <NavLink to={`/${role}/dashboard`} className="nav-link">
               Home
             </NavLink>
           </li>
           {role === "admin" ? (
-            <li className="nav-item">
-              <NavLink
-                to={`/admin/users`}
-                // exact
-                className="nav-link"
-                // activeClassName="active-link"
-              >
+            <li className={`nav-item ${active === "users" ? "active" : ""}`}>
+              <NavLink to={`/admin/users`} className="nav-link">
                 Users
               </NavLink>
             </li>
           ) : (
             <></>
           )}
-          <li className="nav-item">
-            <NavLink
-              to={`/${role}/tasks`}
-              // exact
-              className="nav-link"
-              // activeClassName="active-link"
-            >
+          <li className={`nav-item ${active === "tasks" ? "active" : ""}`}>
+            <NavLink to={`/${role}/tasks`} className="nav-link">
               Tasks
             </NavLink>
           </li>

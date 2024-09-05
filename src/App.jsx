@@ -9,6 +9,9 @@ import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import userLoader from "./loaders/user.loader";
 import AuthenticatedRoute from "./routes/AuthenticatedRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import Profile from "./pages/Profile/Profile";
+import Users from "./pages/Users/Users";
+import adminLoader from "./loaders/admin.loader";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +36,16 @@ const router = createBrowserRouter([
         element: <ResetPassword />,
       },
       {
+        path: "profile",
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "",
+            element: <Profile />,
+          },
+        ],
+      },
+      {
         path: "user",
         element: <ProtectedRoute />,
         loader: userLoader.checkAuth,
@@ -41,6 +54,9 @@ const router = createBrowserRouter([
             path: "dashboard",
             element: <UserDashboard />,
             loader: userLoader.checkAuth,
+          },
+          {
+            path: "workspace",
           },
         ],
       },
@@ -53,6 +69,14 @@ const router = createBrowserRouter([
             path: "dashboard",
             element: <AdminDashboard />,
             loader: userLoader.checkAuth,
+          },
+          {
+            path: "users",
+            element: <Users />,
+            loader: adminLoader.fetchAllUsers,
+          },
+          {
+            path: "tasks",
           },
         ],
       },

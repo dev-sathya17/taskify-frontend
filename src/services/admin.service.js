@@ -4,7 +4,6 @@ const adminService = {
   getAllUsers: async () => {
     try {
       const response = await protectedInstance.get("/admin/users");
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -61,6 +60,15 @@ const adminService = {
   getUsersCount: async () => {
     try {
       const response = await protectedInstance.get("/admin/count/users");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data.message;
+    }
+  },
+  getAllTodos: async () => {
+    try {
+      const response = await protectedInstance.get("/admin/todos");
       return response.data;
     } catch (error) {
       console.log(error);
