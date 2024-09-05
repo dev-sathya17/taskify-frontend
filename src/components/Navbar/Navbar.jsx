@@ -80,7 +80,9 @@ const Navbar = ({ role, active }) => {
               "/"
             )}`}
             alt="profile picture"
-            className="nav-profile"
+            className={`nav-profile ${
+              active === "profile" ? "nav-profile-active" : ""
+            }`}
             onClick={handleProfileNavigation}
           />
           <button
@@ -126,7 +128,7 @@ const Navbar = ({ role, active }) => {
                 "/"
               )}`}
               alt="profile picture"
-              className="nav-profile"
+              className={`nav-profile ${active ? "nav-profile-active" : ""}`}
               onClick={handleProfileNavigation}
             />
             <button

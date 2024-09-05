@@ -79,6 +79,31 @@ const userServices = {
       return error.response.data.message;
     }
   },
+  getProfile: async () => {
+    try {
+      const response = await protectedInstance.get(`/users/profile`);
+      return { data: response.data, status: response.status };
+    } catch (error) {
+      return error.response.data.message;
+    }
+  },
+  uploadImage: async (data, userId) => {
+    try {
+      const response = await protectedInstance.put(
+        `/users/update/${userId}`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return { data: response.data, status: response.status };
+    } catch (error) {
+      console.log(error);
+      return error.response.data.message;
+    }
+  },
 };
 
 export default userServices;

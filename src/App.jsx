@@ -44,6 +44,7 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <Profile />,
+            loader: userLoader.fetchUser,
           },
         ],
       },

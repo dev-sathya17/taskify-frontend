@@ -43,6 +43,9 @@
 .nav-profile {
   width: 45px;
   cursor: pointer;
+}
+
+.nav-profile-active {
   border: 2px solid var(--accent);
   border-radius: 50%;
 }

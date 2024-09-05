@@ -29,6 +29,7 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
       state.loading = false;
       state.error = null;
+      console.log(state);
     },
     updateUserFailure: (state, action) => {
       state.error = action.payload;

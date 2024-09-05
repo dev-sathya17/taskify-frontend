@@ -2,308 +2,23 @@ import { useState, useEffect } from "react";
 import "./Todos.css";
 import Navbar from "../../components/Navbar/Navbar";
 import { IoFlag } from "react-icons/io5";
+import { useLoaderData } from "react-router-dom";
+import todoService from "../../services/todos.service";
 const Todos = () => {
-  const todos = [
-    {
-      isNotified: false,
-      _id: "66d40b29e57be94d36c65536",
-      title: "Todo 1",
-      description: "description for Todo 1",
-      status: "completed",
-      deadline: "2024-09-01T18:30:00.000Z",
-      priority: "low",
-      userId: {
-        _id: "66d32691451947c102ac80d4",
-        name: "username",
-        email: "nirupamasoundarr@gmail.com",
-        password:
-          "$2b$10$CIq9EOA4rtPMBrkaOA/dYeIYo7ym.XWa/qH2P1H/Dv.ZmEPATv.qu",
-        role: "user",
-        mobile: "9975488621",
-        image: "uploads\\1725111263934-avatar.png",
-        otp: null,
-        todos: [
-          "66d40b29e57be94d36c65536",
-          "66d40b2fe57be94d36c6553a",
-          "66d40b36e57be94d36c6553e",
-          "66d40b3be57be94d36c65542",
-          "66d40b3fe57be94d36c65546",
-          "66d40b46e57be94d36c6554a",
-        ],
-        __v: 18,
-      },
-      completedOn: "2024-09-01T06:41:43.963Z",
-      createdAt: "2024-09-01T06:35:21.381Z",
-      updatedAt: "2024-09-01T06:35:21.381Z",
-      __v: 0,
-    },
-    {
-      isNotified: false,
-      _id: "66d40b2fe57be94d36c6553a",
-      title: "Todo 2",
-      description: "description for Todo 2",
-      status: "completed",
-      deadline: "2024-09-01T18:30:00.000Z",
-      priority: "low",
-      userId: {
-        _id: "66d32691451947c102ac80d4",
-        name: "username",
-        email: "nirupamasoundarr@gmail.com",
-        password:
-          "$2b$10$CIq9EOA4rtPMBrkaOA/dYeIYo7ym.XWa/qH2P1H/Dv.ZmEPATv.qu",
-        role: "user",
-        mobile: "9975488621",
-        image: "uploads\\1725111263934-avatar.png",
-        otp: null,
-        todos: [
-          "66d40b29e57be94d36c65536",
-          "66d40b2fe57be94d36c6553a",
-          "66d40b36e57be94d36c6553e",
-          "66d40b3be57be94d36c65542",
-          "66d40b3fe57be94d36c65546",
-          "66d40b46e57be94d36c6554a",
-        ],
-        __v: 18,
-      },
-      completedOn: "2024-09-01T06:53:04.845Z",
-      createdAt: "2024-09-01T06:35:27.638Z",
-      updatedAt: "2024-09-01T06:35:27.638Z",
-      __v: 0,
-    },
-    {
-      _id: "66d40b36e57be94d36c6553e",
-      title: "Todo 3",
-      description: "description for Todo 3",
-      status: "backlog",
-      deadline: "2024-09-01T18:30:00.000Z",
-      priority: "medium",
-      userId: {
-        _id: "66d32691451947c102ac80d4",
-        name: "username",
-        email: "nirupamasoundarr@gmail.com",
-        password:
-          "$2b$10$CIq9EOA4rtPMBrkaOA/dYeIYo7ym.XWa/qH2P1H/Dv.ZmEPATv.qu",
-        role: "user",
-        mobile: "9975488621",
-        image: "uploads\\1725111263934-avatar.png",
-        otp: null,
-        todos: [
-          "66d40b29e57be94d36c65536",
-          "66d40b2fe57be94d36c6553a",
-          "66d40b36e57be94d36c6553e",
-          "66d40b3be57be94d36c65542",
-          "66d40b3fe57be94d36c65546",
-          "66d40b46e57be94d36c6554a",
-        ],
-        __v: 18,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T06:35:34.990Z",
-      updatedAt: "2024-09-01T06:35:34.990Z",
-      __v: 0,
-      isNotified: true,
-    },
-    {
-      _id: "66d40b3be57be94d36c65542",
-      title: "Todo 4",
-      description: "description for Todo 4",
-      status: "backlog",
-      deadline: "2024-09-01T18:30:00.000Z",
-      priority: "medium",
-      userId: {
-        _id: "66d32691451947c102ac80d4",
-        name: "username",
-        email: "nirupamasoundarr@gmail.com",
-        password:
-          "$2b$10$CIq9EOA4rtPMBrkaOA/dYeIYo7ym.XWa/qH2P1H/Dv.ZmEPATv.qu",
-        role: "user",
-        mobile: "9975488621",
-        image: "uploads\\1725111263934-avatar.png",
-        otp: null,
-        todos: [
-          "66d40b29e57be94d36c65536",
-          "66d40b2fe57be94d36c6553a",
-          "66d40b36e57be94d36c6553e",
-          "66d40b3be57be94d36c65542",
-          "66d40b3fe57be94d36c65546",
-          "66d40b46e57be94d36c6554a",
-        ],
-        __v: 18,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T06:35:39.277Z",
-      updatedAt: "2024-09-01T06:35:39.277Z",
-      __v: 0,
-      isNotified: true,
-    },
-    {
-      _id: "66d40b3fe57be94d36c65546",
-      title: "Todo 5",
-      description: "description for Todo 5",
-      status: "backlog",
-      deadline: "2024-08-31T18:30:00.000Z",
-      priority: "medium",
-      userId: {
-        _id: "66d32691451947c102ac80d4",
-        name: "username",
-        email: "nirupamasoundarr@gmail.com",
-        password:
-          "$2b$10$CIq9EOA4rtPMBrkaOA/dYeIYo7ym.XWa/qH2P1H/Dv.ZmEPATv.qu",
-        role: "user",
-        mobile: "9975488621",
-        image: "uploads\\1725111263934-avatar.png",
-        otp: null,
-        todos: [
-          "66d40b29e57be94d36c65536",
-          "66d40b2fe57be94d36c6553a",
-          "66d40b36e57be94d36c6553e",
-          "66d40b3be57be94d36c65542",
-          "66d40b3fe57be94d36c65546",
-          "66d40b46e57be94d36c6554a",
-        ],
-        __v: 18,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T06:35:43.778Z",
-      updatedAt: "2024-09-01T06:35:43.778Z",
-      __v: 0,
-      isNotified: false,
-    },
-    {
-      _id: "66d40b46e57be94d36c6554a",
-      title: "Todo 6",
-      description: "description for Todo 6",
-      status: "backlog",
-      deadline: "2024-08-31T18:30:00.000Z",
-      priority: "high",
-      userId: {
-        _id: "66d32691451947c102ac80d4",
-        name: "username",
-        email: "nirupamasoundarr@gmail.com",
-        password:
-          "$2b$10$CIq9EOA4rtPMBrkaOA/dYeIYo7ym.XWa/qH2P1H/Dv.ZmEPATv.qu",
-        role: "user",
-        mobile: "9975488621",
-        image: "uploads\\1725111263934-avatar.png",
-        otp: null,
-        todos: [
-          "66d40b29e57be94d36c65536",
-          "66d40b2fe57be94d36c6553a",
-          "66d40b36e57be94d36c6553e",
-          "66d40b3be57be94d36c65542",
-          "66d40b3fe57be94d36c65546",
-          "66d40b46e57be94d36c6554a",
-        ],
-        __v: 18,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T06:35:50.683Z",
-      updatedAt: "2024-09-01T06:35:50.683Z",
-      __v: 0,
-      isNotified: false,
-    },
-    {
-      _id: "66d43dab9f1628c75e0228be",
-      title: "Todo 1",
-      description: "description for Todo 1",
-      status: "backlog",
-      deadline: "2024-08-31T18:30:00.000Z",
-      priority: "high",
-      userId: {
-        _id: "66d438ac19f801bed7efd091",
-        name: "user-2",
-        email: "dev.sathya1701@gmail.com",
-        password:
-          "$2b$10$7USxQW2vq40D.J2NQgEKPOsGf4dMHXqYckzyMuScYlUnIa9yFRHFG",
-        role: "user",
-        mobile: "9975400621",
-        image: "uploads/avatar.png",
-        otp: "0",
-        todos: [
-          "66d43dab9f1628c75e0228be",
-          "66d43db49f1628c75e0228c2",
-          "66d43dbc9f1628c75e0228c6",
-        ],
-        __v: 3,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T10:10:51.063Z",
-      updatedAt: "2024-09-01T10:10:51.063Z",
-      __v: 0,
-      isNotified: false,
-    },
-    {
-      _id: "66d43db49f1628c75e0228c2",
-      title: "Todo 2",
-      description: "description for Todo 2",
-      status: "backlog",
-      deadline: "2024-09-01T18:30:00.000Z",
-      priority: "medium",
-      userId: {
-        _id: "66d438ac19f801bed7efd091",
-        name: "user-2",
-        email: "dev.sathya1701@gmail.com",
-        password:
-          "$2b$10$7USxQW2vq40D.J2NQgEKPOsGf4dMHXqYckzyMuScYlUnIa9yFRHFG",
-        role: "user",
-        mobile: "9975400621",
-        image: "uploads/avatar.png",
-        otp: "0",
-        todos: [
-          "66d43dab9f1628c75e0228be",
-          "66d43db49f1628c75e0228c2",
-          "66d43dbc9f1628c75e0228c6",
-        ],
-        __v: 3,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T10:11:00.312Z",
-      updatedAt: "2024-09-01T10:11:00.312Z",
-      __v: 0,
-      isNotified: true,
-    },
-    {
-      _id: "66d43dbc9f1628c75e0228c6",
-      title: "Todo 3",
-      description: "description for Todo 3",
-      status: "backlog",
-      deadline: "2024-09-02T18:30:00.000Z",
-      priority: "low",
-      userId: {
-        _id: "66d438ac19f801bed7efd091",
-        name: "user-2",
-        email: "dev.sathya1701@gmail.com",
-        password:
-          "$2b$10$7USxQW2vq40D.J2NQgEKPOsGf4dMHXqYckzyMuScYlUnIa9yFRHFG",
-        role: "user",
-        mobile: "9975400621",
-        image: "uploads/avatar.png",
-        otp: "0",
-        todos: [
-          "66d43dab9f1628c75e0228be",
-          "66d43db49f1628c75e0228c2",
-          "66d43dbc9f1628c75e0228c6",
-        ],
-        __v: 3,
-      },
-      completedOn: null,
-      createdAt: "2024-09-01T10:11:08.224Z",
-      updatedAt: "2024-09-01T10:11:08.224Z",
-      __v: 0,
-      isNotified: false,
-    },
-  ];
+  const { data } = useLoaderData();
 
-  const [filteredTodos, setFilteredTodos] = useState(todos);
+  const [filteredTodos, setFilteredTodos] = useState(data);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("none");
+  const [formData, setFormData] = useState();
 
   useEffect(() => {
     filterAndSortTodos();
   }, [searchTerm, sortOrder]);
 
   const filterAndSortTodos = () => {
-    let filtered = todos.filter(
+    let filtered = data.filter(
       (todo) =>
         todo.userId.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         todo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -323,6 +38,56 @@ const Todos = () => {
     }
 
     setFilteredTodos(filtered);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleUpdate = (todo) => {
+    setFormData(todo);
+    setModalOpen(true);
+  };
+
+  const updateData = () => {
+    todoService
+      .updateTodo(formData._id, formData)
+      .then((response) => {
+        if (response.status === 200) {
+          const updatedTodos = filteredTodos.map((todo) =>
+            todo._id === formData._id ? formData : todo
+          );
+          setFilteredTodos(updatedTodos);
+          setFormData(null);
+          alert("Todo updated successfully");
+          setModalOpen(false);
+        } else {
+          alert(response);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  };
+
+  const handleDelete = (id) => {
+    todoService
+      .deleteTodo(id)
+      .then((response) => {
+        if (response.status === 200) {
+          const updatedTodos = filteredTodos.filter((todo) => todo._id !== id);
+          setFilteredTodos(updatedTodos);
+          alert("Todo deleted successfully");
+        } else {
+          alert(response);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
   };
 
   return (
@@ -383,10 +148,93 @@ const Todos = () => {
                   </p>
                 )}
               </div>
+              <div className="todo-footer">
+                <button
+                  className="update-btn"
+                  onClick={() => handleUpdate(todo)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(todo._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Edit Todo</h2>
+            <label>
+              Title:
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Description:
+              <input
+                type="text"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Priority:
+              <select
+                name="priority"
+                id="priority"
+                value={formData.priority}
+                onChange={handleChange}
+              >
+                <option value="low">Low</option>{" "}
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>
+              Status:
+              <select
+                name="status"
+                id="status"
+                value={formData.status}
+                onChange={handleChange}
+              >
+                <option value="backlog">Backlog</option>{" "}
+                <option value="pending">Pending</option>
+                <option value="in-progress">In-Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </label>
+            <label>
+              Deadline:
+              <input
+                type="date"
+                name="deadline"
+                value={formData.deadline.split("T")[0]}
+                onChange={handleChange}
+              />
+            </label>
+            <div className="modal-actions">
+              <button className="save-btn" onClick={updateData}>
+                Save
+              </button>
+              <button className="close-btn" onClick={() => setModalOpen(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
