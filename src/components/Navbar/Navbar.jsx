@@ -1,13 +1,46 @@
 import "./Navbar.css";
 import Header from "../Header/Header";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
 import { useState } from "react";
+import userServices from "../../services/user.service";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signOutUserFailure,
+  signOutUserStart,
+  signOutUserSuccess,
+} from "../../features/user/userSlice";
 const Navbar = ({ role }) => {
   const [view, setView] = useState(false);
+  const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleToggle = () => setView(!view);
+
+  const handleClick = () => {
+    const choice = confirm("Are you sure you want to logout?");
+    if (choice) {
+      dispatch(signOutUserStart());
+      userServices
+        .logout()
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            alert(response.data.message);
+            dispatch(signOutUserSuccess());
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error.response.data.message);
+          dispatch(signOutUserFailure(error.message));
+        });
+    }
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -57,7 +90,13 @@ const Navbar = ({ role }) => {
             alt="profile picture"
             className="nav-profile"
           />
-          <button className="nav-logout-btn">Logout</button>
+          <button
+            className="nav-logout-btn"
+            onClick={handleClick}
+            disabled={loading}
+          >
+            {loading ? "Logging Out..." : "Logout"}
+          </button>
         </div>
       </nav>
       {view && (
@@ -88,7 +127,13 @@ const Navbar = ({ role }) => {
             </li>
           </ul>
           <div className="nav-footer-mob">
-            <button className="nav-logout-btn">LOGOUT</button>
+            <button
+              className="nav-logout-btn"
+              onClick={handleClick}
+              disabled={loading}
+            >
+              {loading ? "Logging Out..." : "Logout"}
+            </button>
           </div>
         </div>
       )}

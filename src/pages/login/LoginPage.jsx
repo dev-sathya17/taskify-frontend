@@ -47,16 +47,18 @@ const LoginPage = () => {
       userServices
         .login(formik.values)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             alert(response.data.message);
             formik.resetForm();
             dispatch(signInSuccess(response.data.user));
             if (response.data.user.role === "user") {
-              navigate("/users/dashboard");
+              navigate("/user/dashboard");
             } else if (response.data.user.role === "admin") {
               navigate("/admin/dashboard");
             }
+          } else {
+            alert(response);
+            dispatch(signInFailure());
           }
         })
         .catch((error) => {

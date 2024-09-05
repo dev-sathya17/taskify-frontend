@@ -1,0 +1,28 @@
+.usr-dashboard {
+  width: 100%;
+  background-color: var(--white);
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 20px;
+}
+.usr-dashboard-row {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.usr-dashboard-cell {
+  height: 100%;
+  background-color: brown;
+  width: 350px;
+}
+.bar-graph {
+  width: calc(100% - 400px);
+}
