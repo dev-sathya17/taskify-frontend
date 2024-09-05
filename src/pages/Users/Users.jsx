@@ -85,14 +85,14 @@ const Users = () => {
             )
           );
           setModalOpen(false);
-          updateUserSuccess(response.data.updatedUser);
+          dispatchEvent(updateUserSuccess(response.data.updatedUser));
         } else {
           alert(response);
-          updateUserFailure(response);
+          dispatchEvent(updateUserFailure(response));
         }
       })
       .catch((err) => {
-        updateUserFailure(err.message);
+        dispatch(updateUserFailure(err.message));
         console.error(err);
       });
   };

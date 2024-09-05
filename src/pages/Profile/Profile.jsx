@@ -55,7 +55,7 @@ const Profile = () => {
         }
       })
       .catch((err) => {
-        updateUserFailure(err.message);
+        dispatch(updateUserFailure(err.message));
         console.error(err);
       });
   };
@@ -112,16 +112,16 @@ const Profile = () => {
       .then((response) => {
         if (response.status === 200) {
           alert(response.data.message);
-          updateUserSuccess(response.data.updatedUser);
+          dispatch(updateUserSuccess(response.data.updatedUser));
           user.image = response.data.updatedUser.image;
           setImageUrl(null);
         } else {
           alert(response);
-          updateUserFailure(response);
+          dispatch(updateUserFailure(response));
         }
       })
       .catch((err) => {
-        updateUserFailure(err.message);
+        dispatch(updateUserFailure(err.message));
         console.error(err);
       });
   };
