@@ -194,9 +194,6 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 500px) {
-  /* .radio-container > label {
-    font-size: 11px;
-  } */
   .radio-container {
     gap: 1px;
   }

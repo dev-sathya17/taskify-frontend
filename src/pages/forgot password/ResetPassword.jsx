@@ -77,7 +77,6 @@ const ResetPassword = () => {
     userServices
       .reset(email, password)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           alert(response.data.message);
           setPassword("");

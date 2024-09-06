@@ -17,7 +17,6 @@ import { columns } from "./columns";
 import "./Kanban.css";
 import { createPortal } from "react-dom";
 import TaskCard from "../KanbanItem/TaskCard";
-// import TaskModal from "../TaskModal/TaskModal";
 import todoService from "../../services/todos.service";
 
 const KanbanBoard = ({ tasks, filter }) => {
@@ -25,8 +24,6 @@ const KanbanBoard = ({ tasks, filter }) => {
   const [taskItems, setTaskItems] = useState(tasks);
   const [activeColumn, setActiveColumn] = useState();
   const [activeTask, setActiveTask] = useState();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -87,17 +84,16 @@ const KanbanBoard = ({ tasks, filter }) => {
         const task = activeData.task;
         const newStatus = overData.column.title.toLowerCase();
         task.status = newStatus;
-        console.log(newStatus, task._id);
         todoService
           .updateTodo(task._id, { status: newStatus })
           .then((response) => {
-            console.log(response);
             if (response.status === 200) {
               alert(`Task moved to "${newStatus}"`);
             }
           })
           .catch((error) => {
             console.log(error);
+            alert(error.message);
           });
         return;
       }
@@ -122,16 +118,6 @@ const KanbanBoard = ({ tasks, filter }) => {
     }
   };
 
-  const openModal = (task) => {
-    setSelectedTask(task);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedTask(null);
-  };
-
   return (
     <DndContext
       sensors={sensors}
@@ -152,7 +138,6 @@ const KanbanBoard = ({ tasks, filter }) => {
               tasks={taskItems.filter(
                 (task) => task.status === column.title.toLowerCase()
               )}
-              openModal={openModal}
             />
           ))}
         </SortableContext>
@@ -162,7 +147,6 @@ const KanbanBoard = ({ tasks, filter }) => {
               <Column
                 column={activeColumn}
                 key={activeColumn.id}
-                openModal={openModal}
                 tasks={taskItems.filter(
                   (task) => task.status === activeColumn.title.toLowerCase()
                 )}
@@ -172,9 +156,6 @@ const KanbanBoard = ({ tasks, filter }) => {
           </DragOverlay>,
           document.body
         )}
-        {/* {isModalOpen && (
-          <TaskModal task={selectedTask} closeModal={closeModal} />
-        )} */}
       </div>
     </DndContext>
   );

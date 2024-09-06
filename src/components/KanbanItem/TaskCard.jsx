@@ -4,7 +4,7 @@ import { RiFlag2Fill } from "react-icons/ri";
 import { RxLapTimer } from "react-icons/rx";
 import "./TaskCard.css";
 
-const TaskCard = ({ task, openModal }) => {
+const TaskCard = ({ task }) => {
   const {
     setNodeRef,
     attributes,
@@ -26,7 +26,6 @@ const TaskCard = ({ task, openModal }) => {
   return (
     <div
       className="task-card"
-      onClick={() => openModal(task)}
       ref={setNodeRef}
       style={style}
       {...attributes}

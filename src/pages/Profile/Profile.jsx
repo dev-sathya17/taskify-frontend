@@ -41,7 +41,6 @@ const Profile = () => {
     userServices
       .updateUser(user._id, updatedUser)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           alert(response.data.message);
           dispatch(updateUserSuccess(response.data.updatedUser));

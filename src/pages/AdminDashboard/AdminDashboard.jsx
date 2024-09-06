@@ -24,6 +24,7 @@ const AdminDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     adminService
@@ -47,6 +48,7 @@ const AdminDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     adminService
@@ -73,6 +75,7 @@ const AdminDashboard = () => {
         setTodosByStatus(data);
       })
       .catch((error) => {
+        alert(error.message);
         console.log(error);
       });
 
@@ -83,6 +86,7 @@ const AdminDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     adminService
@@ -92,6 +96,7 @@ const AdminDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     adminService
@@ -108,6 +113,7 @@ const AdminDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
   }, []);
 

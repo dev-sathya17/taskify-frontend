@@ -49,7 +49,6 @@ const Register = () => {
       userServices
         .register(values)
         .then((response) => {
-          console.log(response);
           alert(response.data.message);
           if (response.status === 201) {
             formik.resetForm();

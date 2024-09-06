@@ -37,6 +37,7 @@ const UserDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     todoService
@@ -64,6 +65,7 @@ const UserDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     todoService
@@ -73,6 +75,7 @@ const UserDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     todoService
@@ -82,6 +85,7 @@ const UserDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
 
     todoService
@@ -98,6 +102,7 @@ const UserDashboard = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert(error.message);
       });
   }, []);
 

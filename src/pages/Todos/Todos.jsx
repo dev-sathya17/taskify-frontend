@@ -68,7 +68,7 @@ const Todos = () => {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+        alert(error.message);
       });
   };
 
@@ -86,7 +86,7 @@ const Todos = () => {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+        alert(error.message);
       });
   };
 

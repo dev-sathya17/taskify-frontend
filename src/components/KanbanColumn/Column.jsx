@@ -7,7 +7,7 @@ import { CSS } from "@dnd-kit/utilities";
 import TaskCard from "../KanbanItem/TaskCard";
 import "./Column.css";
 
-const Column = ({ column, tasks, openModal }) => {
+const Column = ({ column, tasks }) => {
   const {
     setNodeRef,
     attributes,
@@ -38,7 +38,7 @@ const Column = ({ column, tasks, openModal }) => {
           strategy={verticalListSortingStrategy}
         >
           {tasks.map((task) => (
-            <TaskCard key={task.id} task={task} openModal={openModal} />
+            <TaskCard key={task.id} task={task} />
           ))}
         </SortableContext>
       </main>
