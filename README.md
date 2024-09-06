@@ -107,3 +107,10 @@ npm install
 ```
 npm run dev
 ```
+
+## Sample Admin Credentials
+
+```
+email: vsvs2209@gmail.com
+password: Admin@123
+```

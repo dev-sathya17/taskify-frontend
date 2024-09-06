@@ -42,6 +42,7 @@
 
 .nav-profile {
   width: 45px;
+  height: 45px;
   cursor: pointer;
   border-radius: 50%;
 }
