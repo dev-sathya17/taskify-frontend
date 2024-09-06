@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Register from "./pages/Register/Register";
 import LoginPage from "./pages/login/LoginPage";
-import ForgotPassword from "./pages/forgot Password/ForgotPassword";
+import ForgotPassword from "./pages/forgot password/ForgotPassword";
 import ResetPassword from "./pages/forgot password/ResetPassword";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
