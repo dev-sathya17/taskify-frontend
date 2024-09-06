@@ -77,7 +77,7 @@ const Navbar = ({ role, active }) => {
         </ul>
         <div className="nav-footer">
           <img
-            src={`http://localhost:3000/${currentUser.image.replace(
+            src={`https://todolist-backend-hu3n.onrender.com/${currentUser.image.replace(
               "\\",
               "/"
             )}`}
@@ -125,7 +125,7 @@ const Navbar = ({ role, active }) => {
           </ul>
           <div className="nav-footer-mob">
             <img
-              src={`http://localhost:3000/${currentUser.image.replace(
+              src={`https://todolist-backend-hu3n.onrender.com/${currentUser.image.replace(
                 "\\",
                 "/"
               )}`}

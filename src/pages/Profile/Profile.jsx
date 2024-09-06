@@ -136,7 +136,7 @@ const Profile = () => {
                 <img src={imageUrl} alt="Profile" />
               ) : (
                 <img
-                  src={`http://localhost:3000/${user.image}`}
+                  src={`https://todolist-backend-hu3n.onrender.com/${user.image}`}
                   alt={user.firstName}
                 />
               )}

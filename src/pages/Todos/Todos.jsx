@@ -125,7 +125,7 @@ const Todos = () => {
                 <div className="todo-user">
                   <p>User: {todo.userId.name}</p>
                   <img
-                    src={`http://localhost:3000/${todo.userId.image.replace(
+                    src={`https://todolist-backend-hu3n.onrender.com/${todo.userId.image.replace(
                       "\\",
                       "/"
                     )}`}

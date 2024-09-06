@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3000/api/v1";
+const baseURL = "https://todolist-backend-hu3n.onrender.com/api/v1";
 
 const instance = axios.create({
   baseURL,

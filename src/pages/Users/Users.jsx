@@ -116,7 +116,10 @@ const Users = () => {
             filteredUsers.map((user, index) => (
               <div key={index} className="user-card">
                 <img
-                  src={`http://localhost:3000/${user.image.replace("\\", "/")}`}
+                  src={`https://todolist-backend-hu3n.onrender.com/${user.image.replace(
+                    "\\",
+                    "/"
+                  )}`}
                   alt={user.name}
                   className="user-image"
                 />
