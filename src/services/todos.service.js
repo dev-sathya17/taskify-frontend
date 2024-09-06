@@ -1,6 +1,14 @@
 import { protectedInstance } from "./instance";
 
 const todoService = {
+  addTodo: async (data) => {
+    try {
+      const response = await protectedInstance.post(`/todos`, data);
+      return { data: response.data, status: response.status };
+    } catch (error) {
+      return error.response.data.message;
+    }
+  },
   updateTodo: async (id, data) => {
     try {
       const response = await protectedInstance.put(`/todos/${id}`, data);
@@ -58,6 +66,15 @@ const todoService = {
       const response = await protectedInstance.get(
         "/todos/count/completion/percentage"
       );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error.response.data.message;
+    }
+  },
+  getUserTodos: async () => {
+    try {
+      const response = await protectedInstance.get("/todos");
       return response.data;
     } catch (error) {
       console.log(error);

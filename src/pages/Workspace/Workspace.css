@@ -1,0 +1,95 @@
+.workspace-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  /* background-color: var(--primary); */
+  color: var(--white);
+  flex-wrap: wrap;
+}
+
+.add-todo-btn {
+  background-color: var(--accent);
+  padding: 10px 20px;
+  color: var(--white);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-icon {
+  font-size: 24px;
+}
+
+.add-todo-btn:hover {
+  background-color: var(--accent-dark);
+}
+
+input[type="search"] {
+  padding: 10px;
+  width: 50%;
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modal {
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+}
+
+.modal button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal button:hover {
+  background-color: var(--accent-dark);
+}
+@media (max-width: 768px) {
+  .workspace-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  input[type="search"] {
+    width: 100%;
+  }
+
+  .add-todo-btn {
+    width: 100%;
+  }
+}

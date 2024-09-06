@@ -13,6 +13,8 @@ import Profile from "./pages/Profile/Profile";
 import Users from "./pages/Users/Users";
 import Todos from "./pages/Todos/Todos";
 import adminLoader from "./loaders/admin.loader";
+import Workspace from "./pages/Workspace/Workspace";
+import todosLoader from "./loaders/todos.loader";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,8 @@ const router = createBrowserRouter([
           },
           {
             path: "workspace",
+            element: <Workspace />,
+            loader: todosLoader.fetchUserTodos,
           },
         ],
       },
