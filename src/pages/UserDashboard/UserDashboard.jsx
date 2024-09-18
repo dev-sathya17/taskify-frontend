@@ -140,7 +140,7 @@ const UserDashboard = () => {
             )}
           </div>
 
-          <div className="usr-dashboard-cell bar-graph">
+          <div className="usr-dashboard-cell usr-bar-graph">
             <p className="usr-dashboard-title">Task completion Graph</p>
             {completionData && completionData.length > 0 ? (
               <BarChartComponent data={completionData} />

@@ -92,7 +92,7 @@ const Navbar = ({ role, active }) => {
             onClick={handleClick}
             disabled={loading}
           >
-            {loading ? "Logging Out..." : "Logout"}
+            Logout
           </button>
         </div>
       </nav>
