@@ -11,6 +11,7 @@ const Workspace = () => {
   const [filter, setFilter] = useState("none");
   const [searchTerm, setSearchTerm] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -35,11 +36,13 @@ const Workspace = () => {
   };
 
   const handleSubmitTodo = (e) => {
+    setLoading(true);
     e.preventDefault();
     todoService
       .addTodo(formData)
       .then((response) => {
         if (response.status === 201) {
+          setLoading(false);
           alert(response.data.message);
           data.push(response.data.savedTodo);
           closeModal();
@@ -55,6 +58,7 @@ const Workspace = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
         alert(error.message);
         closeModal();
@@ -132,7 +136,9 @@ const Workspace = () => {
             value={formData.deadline}
             onChange={handleChange}
           />
-          <button type="submit">Add Todo</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Adding todo.." : "Add Todo"}
+          </button>
           <button onClick={closeModal}>Cancel</button>
         </form>
       </Modal>

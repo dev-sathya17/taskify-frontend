@@ -20,6 +20,8 @@ const Users = () => {
   const [filteredUsers, setFilteredUsers] = useState(data);
   const [editingUser, setEditingUser] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,20 +40,24 @@ const Users = () => {
   const handleDelete = (user) => {
     const choice = confirm(`Are you sure you want to delete ${user.name}?`);
     if (choice) {
+      setLoading(true);
       dispatch(deleteUserStart());
       userServices
         .deleteUser(user._id)
         .then((response) => {
+          setLoading(false);
           if (response.status === 200) {
             alert(response.data.message);
             dispatch(deleteUserSuccess());
-            setUsers(users.filter((user) => user._id !== user._id));
+            const filteredUsers = users.filter((item) => item._id !== user._id);
+            setUsers(filteredUsers);
           } else {
             alert(response);
             dispatch(deleteUserFailure(response));
           }
         })
         .catch((error) => {
+          setLoading(false);
           console.error(error);
           dispatch(deleteUserFailure(error.message));
           alert(error.message);
@@ -72,10 +78,12 @@ const Users = () => {
   };
 
   const handleSave = () => {
+    setLoading(true);
     dispatch(updateUserStart());
     userServices
       .updateUser(editingUser._id, editingUser)
       .then((response) => {
+        setLoading(false);
         if (response.status === 200) {
           alert(response.data.message);
           setEditingUser(null);
@@ -92,6 +100,7 @@ const Users = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         dispatch(updateUserFailure(err.message));
         console.error(err);
       });
@@ -129,14 +138,19 @@ const Users = () => {
                 <p>Mobile: {user.mobile}</p>
 
                 <div className="user-actions">
-                  <button className="edit-btn" onClick={() => handleEdit(user)}>
-                    Edit
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEdit(user)}
+                    disabled={loading}
+                  >
+                    {loading ? "Loading..." : "Edit"}
                   </button>
                   <button
                     className="delete-btn"
+                    disabled={loading}
                     onClick={() => handleDelete(user)}
                   >
-                    Delete
+                    {loading ? "Loading..." : "Delete"}
                   </button>
                 </div>
               </div>
@@ -178,8 +192,12 @@ const Users = () => {
                 />
               </label>
               <div className="modal-actions">
-                <button className="save-btn" onClick={handleSave}>
-                  Save
+                <button
+                  className="save-btn"
+                  onClick={handleSave}
+                  disabled={loading}
+                >
+                  {loading ? "Loading..." : "Save"}
                 </button>
                 <button
                   className="close-btn"

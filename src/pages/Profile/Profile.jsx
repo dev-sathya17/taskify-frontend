@@ -26,6 +26,7 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,10 +38,12 @@ const Profile = () => {
   };
 
   const handleUpdate = (updatedUser) => {
+    setLoading(true);
     dispatch(updateUserStart());
     userServices
       .updateUser(user._id, updatedUser)
       .then((response) => {
+        setLoading(false);
         if (response.status === 200) {
           alert(response.data.message);
           dispatch(updateUserSuccess(response.data.updatedUser));
@@ -54,6 +57,7 @@ const Profile = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         dispatch(updateUserFailure(err.message));
         console.error(err);
       });
@@ -62,10 +66,12 @@ const Profile = () => {
   const handleDelete = () => {
     const choice = confirm(`Are you sure you want to delete your account?`);
     if (choice) {
+      setLoading(true);
       dispatch(deleteUserStart());
       userServices
         .deleteUser(user._id)
         .then((response) => {
+          setLoading(false);
           if (response.status === 200) {
             alert(response.data.message);
             dispatch(deleteUserSuccess());
@@ -76,6 +82,7 @@ const Profile = () => {
           }
         })
         .catch((error) => {
+          setLoading(false);
           console.error(error);
           dispatch(deleteUserFailure(error.message));
           alert(error.message);
@@ -188,15 +195,16 @@ const Profile = () => {
                   type="button"
                   className="update-btn"
                   onClick={() => setModalOpen(true)}
+                  disabled={loading}
                 >
-                  Update
+                  {loading ? "Loading.." : "Update"}
                 </button>
                 <button
                   type="button"
                   className="delete-btn"
                   onClick={handleDelete}
                 >
-                  Delete
+                  {loading ? "Loading.." : "Delete"}
                 </button>
               </div>
             </div>

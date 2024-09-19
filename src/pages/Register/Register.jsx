@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import userServices from "../../services/user.service";
+import { useState } from "react";
 
 const validate = (values) => {
   const errors = {};
@@ -36,6 +37,7 @@ const validate = (values) => {
 };
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -46,9 +48,11 @@ const Register = () => {
     },
     validate,
     onSubmit: (values, { setSubmitting }) => {
+      setLoading(true);
       userServices
         .register(values)
         .then((response) => {
+          setLoading(false);
           alert(response.data.message);
           if (response.status === 201) {
             formik.resetForm();
@@ -56,6 +60,7 @@ const Register = () => {
           }
         })
         .catch((error) => {
+          setLoading(false);
           console.log(error.response);
           alert(error.response.data.message);
         });
@@ -152,8 +157,8 @@ const Register = () => {
                 ) : null}
               </div>
             </div>
-            <button type="submit" className="submit-button">
-              REGISTER
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? "Registering..." : "REGISTER"}
             </button>
             <p className="align-center login-nav">
               Already have an account?{" "}

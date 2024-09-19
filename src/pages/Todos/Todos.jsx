@@ -12,6 +12,7 @@ const Todos = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("none");
   const [formData, setFormData] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     filterAndSortTodos();
@@ -51,9 +52,11 @@ const Todos = () => {
   };
 
   const updateData = () => {
+    setLoading(true);
     todoService
       .updateTodo(formData._id, formData)
       .then((response) => {
+        setLoading(false);
         if (response.status === 200) {
           const updatedTodos = filteredTodos.map((todo) =>
             todo._id === formData._id ? formData : todo
@@ -67,16 +70,19 @@ const Todos = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
         alert(error.message);
       });
   };
 
   const handleDelete = (id) => {
+    setLoading(true);
     todoService
       .deleteTodo(id)
       .then((response) => {
         if (response.status === 200) {
+          setLoading(false);
           const updatedTodos = filteredTodos.filter((todo) => todo._id !== id);
           setFilteredTodos(updatedTodos);
           alert("Todo deleted successfully");
@@ -85,6 +91,7 @@ const Todos = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
         alert(error.message);
       });
@@ -151,15 +158,17 @@ const Todos = () => {
               <div className="todo-footer">
                 <button
                   className="update-btn"
+                  disabled={loading}
                   onClick={() => handleUpdate(todo)}
                 >
                   Edit
                 </button>
                 <button
                   className="delete-btn"
+                  disabled={loading}
                   onClick={() => handleDelete(todo._id)}
                 >
-                  Delete
+                  {loading ? "Loading..." : "Delete"}
                 </button>
               </div>
             </div>
@@ -226,7 +235,7 @@ const Todos = () => {
             </label>
             <div className="modal-actions">
               <button className="save-btn" onClick={updateData}>
-                Save
+                {loading ? "Saving..." : "Save"}
               </button>
               <button className="close-btn" onClick={() => setModalOpen(false)}>
                 Close
