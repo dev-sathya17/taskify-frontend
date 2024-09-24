@@ -6,6 +6,7 @@ const userServices = {
       const response = await instance.post("/users/register", data);
       return { data: response.data, status: response.status };
     } catch (error) {
+      console.log(error);
       return error.response.data.message;
     }
   },
@@ -16,6 +17,7 @@ const userServices = {
       });
       return { data: response.data, status: response.status };
     } catch (error) {
+      console.log(error);
       return error.response.data.message;
     }
   },
@@ -24,6 +26,7 @@ const userServices = {
       const response = await instance.post(`/users/forgot-password`, { email });
       return { data: response.data, status: response.status };
     } catch (error) {
+      console.log(error);
       return error.response.data.message;
     }
   },

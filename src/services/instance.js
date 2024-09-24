@@ -7,7 +7,7 @@ const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 10000,
 });
 
 const protectedInstance = axios.create({
@@ -15,7 +15,7 @@ const protectedInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 10000,
   withCredentials: true,
 });
 
